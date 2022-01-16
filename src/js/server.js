@@ -4,7 +4,12 @@ export default class Server {
   }
 
   async loadNews() {
-    const news = await fetch(this.url);
-    return news.json();
+    try {
+      const news = await fetch(this.url);
+      return news.json();
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }

@@ -1,20 +1,48 @@
 export default class Loading {
     constructor(server) {
         this.server = server;
+        this.buttonUpdate = document.querySelector('.header-update');
         this.newsList = document.querySelector('.list-news');
+        this.waitNewsBox = document.querySelector('.wait-news');
+        this.noResponse = document.querySelector('.no-response');
         this.news = null;
     }
 
     events() {
+        this.renderWaitNews();
         this.responseNews()
+        this.clickBtnUpdate();
     }
 
     async responseNews() {
         const news = await this.server.loadNews();
-        this.renderNews(news)
+        if (news) {
+            this.noResponse.classList.add('none');
+            this.newsList.textContent = null;
+            this.renderNews(news)
+        } else {
+            this.noResponse.classList.remove('none');
+        }
+    }
+
+    clickBtnUpdate() {
+        this.buttonUpdate.addEventListener('click', () => {
+            this.newsList.textContent = null;
+            this.renderWaitNews();
+            this.responseNews();
+        })
+    }
+
+    renderWaitNews() {
+        for (let i = 0; i < 3; i += 1) {
+            const clone = this.waitNewsBox.cloneNode(true);
+            clone.classList.remove('none');
+            this.newsList.append(clone);
+        }
     }
 
     renderNews(arrayNews) {
+        this.waitNewsBox.classList.add('none');
         for (let i = 0; i < arrayNews.length; i++) {
             this.newsList.append(Loading.createNews(arrayNews[i]))
         }
