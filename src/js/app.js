@@ -1,5 +1,5 @@
-import Loading from "./ifLoad";
-import Server from "./server";
+import Loading from './ifLoad';
+import Server from './server';
 
 console.log('app started');
 
@@ -9,12 +9,12 @@ const load = new Loading(server);
 load.events();
 
 (async () => {
-    try {
-      if (navigator.serviceWorker) {
-        await navigator.serviceWorker.register('./service-worker.js');
-        console.log('sw registered');
-      }
-    } catch (e) {
-      console.log(e);
+  try {
+    if (navigator.serviceWorker) {
+      await navigator.serviceWorker.register('./service-worker.js');
+      console.log('sw registered');
     }
-  })();
+  } catch (e) {
+    console.log(e);
+  }
+})();
