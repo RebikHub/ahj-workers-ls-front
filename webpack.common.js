@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   target: 'web',
@@ -59,6 +59,10 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-    new GenerateSW(),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      cleanupOutdatedCaches: true
+    }),
   ],
 };
