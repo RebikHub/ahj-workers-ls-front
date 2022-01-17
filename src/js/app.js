@@ -6,7 +6,7 @@ console.log('app started');
 const server = new Server();
 const load = new Loading(server);
 
-load.events();
+// load.events();
 
 (async () => {
   try {
@@ -18,3 +18,5 @@ load.events();
     console.log(e);
   }
 })();
+
+load.events();
