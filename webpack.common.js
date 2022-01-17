@@ -70,5 +70,9 @@ module.exports = {
       skipWaiting: true,
       cleanupOutdatedCaches: true
     }),
+    //   new WorkboxPlugin.InjectManifest({
+    //     swSrc: './src/js/service.worker.js',
+    //     swDest: 'service-worker.js',
+    // }),
   ],
 };
